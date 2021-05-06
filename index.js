@@ -19,7 +19,6 @@ client.on('ready', () => {
 	}
 
     new WOKcommands(client, {
-        defaultLangauge: "russian",
         commandDir: 'commands',
         featuresDir: 'features',
         showWarns: false,
