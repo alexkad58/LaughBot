@@ -4,6 +4,7 @@
   },
   "dependencies": {
     "@discordjs/opus": "^0.5.0",
+    "discord-music-player": "^7.1.4",
     "discord.js": "^12.5.3",
     "dotenv": "^9.0.0",
     "express": "^4.17.1",

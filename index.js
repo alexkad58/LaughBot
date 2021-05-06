@@ -1,5 +1,8 @@
 const Discord = require('discord.js')
 const WOKcommands = require('wokcommands')
+const { Player } = require('discord-music-player')
+
+const constance = require('./src/constance.json')
 
 require('dotenv').config()
 
@@ -7,6 +10,8 @@ const client = new Discord.Client({
     partials: ['MESSAGE', 'REACTION'],
 	disableEveryone: false
 })
+
+client.player = new Player(client)
 
 client.on('ready', () => {
     console.log(`\nКлиент запущен!\n`)
@@ -25,7 +30,7 @@ client.on('ready', () => {
         dbOptions
     })
         .setMongoPath(process.env.MONGO_URI)
-        .setColor('#ff7a7a')
+        .setColor(constance.color)
         .setDefaultPrefix('lb!')
 })
 
