@@ -10,6 +10,8 @@ module.exports = {
         const requestedBy = message.author.id
         const embed = new Discord.MessageEmbed().setColor(constance.config)
 
+        const { guild, channel } = message
+
         if (!message.member.voice.channel) {
             message.react('🚫')
             return
@@ -17,7 +19,7 @@ module.exports = {
         
         if (client.player.isPlaying(message)) {
             
-            if (!(client.voice.connections.get(message.guild.id).channel.id === message.member.voice.channel.id)) return message.react('🚫')
+            if (!(client.voice.connections.get(guild.id).channel.id === message.member.voice.channel.id)) return message.react('🚫')
 
             let song = await client.player.addToQueue(message, {
                 search: text,
@@ -26,7 +28,7 @@ module.exports = {
 
             embed
             .setDescription(`Добавил в очередь [${song.name}](${song.url}) [<@${requestedBy}>]`)
-            message.channel.send(embed)
+            channel.send(embed)
         } else {
             let song = await client.player.play(message, {
                 search: text,
@@ -36,12 +38,28 @@ module.exports = {
             embed
             .setTitle('Сейчас играет')
             .setDescription(`[${song.name}](${song.url}) [<@${requestedBy}>]`)
-            message.channel.send(embed)
+            channel.send(embed).then(msg => {
+                if (!client.player.messagesCache) client.player.messagesCache = {}
+                client.player.messagesCache[guild.id] = [channel.id, msg.id]
+            })
             
-            client.player.on('songChanged', (oldSong, newSong, skipped, repeatMode, repeatQueue) => {
+            client.player.on('songChanged', (message, newSong, oldSong) => {
+                if (client.player.messagesCache) {
+                    if (client.player.messagesCache[message.guild.id]) {
+                        let channelId = client.player.messagesCache[message.guild.id][0]
+                        let messageId = client.player.messagesCache[message.guild.id][1]
+
+                        const reqChannel = message.guild.channels.cache.get(channelId)
+                        if (reqChannel) reqMessage = channel.messages.cache.get(messageId)
+                        if (reqMessage) reqMessage.delete()
+                    }
+                } 
                 embed
                 .setDescription(`[${newSong.name}](${newSong.url}) [<@${newSong.requestedBy}>]`)
-                message.channel.send(embed)
+                message.channel.send(embed).then(msg => {
+                    if (!client.player.messagesCache) client.player.messagesCache = {}
+                    client.player.messagesCache[msg.guild.id] = [msg.channel.id, msg.id]
+                })
             })
         }
     }
