@@ -9,12 +9,16 @@
     },
     "PRIVATE_ROOM_PARENT": {
         "english": "PRIVATE",
-        "russian": "create-room"
+        "russian": "ПРИВАТ"
     },
     "PRIVATE_ROOM_NAME": {
-        "english": "ПРИВАТ",
-        "russian": "создать-комнату"
+        "english": "create room",
+        "russian": "создать комнату"
     },
+	"PRIVATE_ROOM_WAITING": {
+		"english": "waiting",
+        "russian": "ожидание"
+	},
 	"LANGUAGE_NOT_SUPPORTED": {
 		"english": "This bot does not have support for {LANGUAGE} at this time.",
 		"spanish": "Este bot no es compatible con {LANGUAGE} en este momento.",

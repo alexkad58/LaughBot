@@ -17,4 +17,11 @@ const scanForGags = (gag) => {
       })
 }
 
+const getNickName = (member) => {
+    if (!member.nickname) return member.user.username
+    return member.nickname
+}
+
 module.exports.scanForGags = scanForGags
+
+module.exports.getNickName = getNickName
