@@ -1,5 +1,5 @@
 const { fetchCache, addToCache } = require('../../features/server-features/reaction-role')
-const rolesMessageSchema = require('../schemas/roles-message-schema')
+const rolesMessageSchema = require('../../schemas/reaction-roles-schema')
 
 module.exports = {
     expectedArgs: '<emoji> <role> <text>',
