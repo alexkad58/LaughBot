@@ -30,7 +30,7 @@ module.exports = (client, instance) => {
             if (!isGag) return
 
             newState.channel.join().then(async connection => {
-                connection.play(`../../src/audio/${gag}.mp3`)
+                connection.play(`src/audio/${gag}.mp3`)
             })
         })
     })
