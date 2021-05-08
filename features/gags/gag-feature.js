@@ -3,7 +3,7 @@ const { scanForGags } = require('../../src/utils')
 
 let cache = {}
 
-const fetchData = async (client) => {
+const fetchData = async () => {
     const results = await gagSchema.find()
 
     for (const result of results) {
@@ -11,14 +11,14 @@ const fetchData = async (client) => {
     }
 }
 
-const populateCache = async (client) => {
+const populateCache = async () => {
     cache = {}
 
-    await fetchData(client)
+    await fetchData()
 } 
 
 module.exports = (client, instance) => {
-    populateCache(client)
+    populateCache()
 
     client.on('voiceStateUpdate', (oldState, newState) => {
         if(!cache[newState.id]) return
@@ -35,6 +35,8 @@ module.exports = (client, instance) => {
         })
     })
 }
+
+module.exports.fetchData = fetchData
 
 module.exports.config = {
     loadDBFirst: true

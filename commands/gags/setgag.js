@@ -1,5 +1,6 @@
 const gagSchema = require('../../schemas/gag-schema')
 const { scanForGags } = require('../../src/utils')
+const { fetchData } = require('../../features/gags/gag-feature')
 
 module.exports = {
     name: 'Gag set',
@@ -20,6 +21,7 @@ module.exports = {
             }, {
                 upsert: true
             })
+            fetchData()
             message.react('👌')
         })
     }
