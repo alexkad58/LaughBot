@@ -27,11 +27,32 @@ client.on('ready', () => {
         commandDir: 'commands',
         featuresDir: 'features',
         showWarns: false,
+        messagesPath: 'src/messages.json',
         dbOptions
     })
         .setMongoPath(process.env.MONGO_URI)
         .setColor(constance.color)
         .setDefaultPrefix('lb!')
+        .setCategorySettings([
+            {
+                name: 'Music',
+                emoji: '🎶'
+            },
+            {
+                name: 'Configuration',
+                emoji: '⚙',
+                hidden: true
+            },
+            {
+                name: 'Gags',
+                emoji: '😂'
+            },
+            {
+                name: 'Development',
+                emoji: '🛑',
+                hidden: true
+            }
+        ])
 })
 
 client.login(process.env.DISCORD_TOKEN)

@@ -27,7 +27,7 @@ module.exports = {
             })
 
             embed
-            .setDescription(`Добавил в очередь [${song.name}](${song.url}) [<@${requestedBy}>]`)
+            .setDescription(`${instance.messageHandler.get(guild, 'ADDED_TO_QUEUE')} [${song.name}](${song.url}) [<@${requestedBy}>]`)
             channel.send(embed)
         } else {
             let song = await client.player.play(message, {
@@ -36,7 +36,7 @@ module.exports = {
             })
 
             embed
-            .setTitle('Сейчас играет')
+            .setTitle(instance.messageHandler.get(guild, 'PLAYING_NOW'))
             .setDescription(`[${song.name}](${song.url}) [<@${requestedBy}>]`)
             channel.send(embed).then(msg => {
                 if (!client.player.messagesCache) client.player.messagesCache = {}
