@@ -18,3 +18,7 @@ module.exports = (client, instance) => {
         channel.send(text.replace(`<@>`, `<@${member.id}>`))
     })
 }
+
+module.exports.config = {
+    loadDBFirst: true
+}

@@ -93,5 +93,9 @@ module.exports = async (client) => {
     }
 }
 
+module.exports.config = {
+    loadDBFirst: true
+}
+
 module.exports.fetchCache = fetchCache
 module.exports.addToCache = addToCache

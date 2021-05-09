@@ -39,4 +39,8 @@ module.exports = (client) => {
     })
 }
 
+module.exports.config = {
+    loadDBFirst: true
+}
+
 module.exports.fetch = fetchData
