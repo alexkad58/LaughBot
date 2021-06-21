@@ -1,1 +1,2 @@
 # LaughBot
+- discord bot

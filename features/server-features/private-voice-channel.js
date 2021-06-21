@@ -33,9 +33,9 @@ module.exports = (client, instance) => {
         const { guild, channel, member } = newState
 
         if (channel.id == pvcCache[guild.id].channelId && (!oldState.channel || oldState.channel?.id != channel.id)) {
-            guild.channels.create(`${getNickName(member)}`, { type: 'voice', parent: pvcCache[guild.id].parentId, position: 2 }).then(vc => {
+            guild.channels.create(`${getNickName(member)}`, { type: 'voice', parent: pvcCache[guild.id].parentId }).then(vc => {
 
-                guild.channels.create(`🔐${getNickName(member)} - ${instance.messageHandler.get(guild, 'PRIVATE_ROOM_WAITING')}`, { type: 'voice', parent: pvcCache[guild.id].parentId, position: 3 }).then(waitVc => {
+                guild.channels.create(`🔐${getNickName(member)} - ${instance.messageHandler.get(guild, 'PRIVATE_ROOM_WAITING')}`, { type: 'voice', parent: pvcCache[guild.id].parentId }).then(waitVc => {
                     if (!pvcCache[guild.id].channels) pvcCache[guild.id].channels = {}
                     pvcCache[guild.id].channels[vc.id] = waitVc.id
 
@@ -63,7 +63,7 @@ module.exports = (client, instance) => {
         if (!pvcCache[oldState.guild.id] || !oldState.channel || !pvcCache[oldState.guild.id].channels) return
 
         const { guild, channel } = oldState
-
+        
         if (pvcCache[guild.id].channels[channel.id] && channel.members.size === 0) {
             channel.delete()
             guild.channels.cache.get(pvcCache[guild.id].channels[channel.id]).delete()

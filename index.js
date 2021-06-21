@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 const WOKcommands = require('wokcommands')
-const { Player } = require('discord-music-player')
+// const { Player } = require('discord-music-player')
 
 const constance = require('./src/constance.json')
 
@@ -11,7 +11,7 @@ const client = new Discord.Client({
 	disableEveryone: false
 })
 
-client.player = new Player(client)
+// client.player = new Player(client)
 
 client.on('ready', () => {
     console.log(`\nКлиент запущен!\n`)
