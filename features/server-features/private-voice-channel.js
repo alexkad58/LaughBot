@@ -11,7 +11,10 @@ const fetchData = async (client) => {
         if (guild) {
             const channel = guild.channels.cache.get(result.channelId)
             if (channel) {
+                let envChannels = null
+                if (pvcCache[result.guildId] && pvcCache[result.guildId].channels) envChannels = pvcCache[result.guildId].channels
                 pvcCache[result.guildId] = { channelId: result.channelId, parentId: result.parentId }
+                if (envChannels) pvcCache[result.guildId].channels = envChannels
             }
         }
     }
